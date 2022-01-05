@@ -1,0 +1,5 @@
+/.dockerignore
+/.vs/BowlingGame/v17/.suo
+/BowlingGame.csproj.user
+/bin
+/obj
