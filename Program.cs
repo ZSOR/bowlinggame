@@ -16,16 +16,20 @@ builder.Services.AddSwaggerGen();
 
 
 
-//Add MySql connection
-var serverVersion = new MySqlServerVersion(new Version("8.0.27"));
-//register the db conext in services
-builder.Services.AddDbContext<BowlingDbContext>(
-    dbContextOptions => 
-    dbContextOptions.UseMySql("server=localhost;user=root;password=Password123;database=bowling", serverVersion)
-    .LogTo(Console.WriteLine, LogLevel.Information)
-    .EnableSensitiveDataLogging()
-    .EnableDetailedErrors()
-    );
+////Add MySql connection
+//var serverVersion = new MySqlServerVersion(new Version("8.0.27"));
+////register the db conext in services
+//builder.Services.AddDbContext<BowlingDbContext>(
+//    dbContextOptions => 
+//    dbContextOptions.UseMySql(ConfigurationService.Configuration.GetConnectionString("DefaultConnection"), serverVersion)
+//    .LogTo(Console.WriteLine, LogLevel.Information)
+//    .EnableSensitiveDataLogging()
+//    .EnableDetailedErrors()
+//    );
+
+
+
+builder.Services.AddDbContext<BowlingDbContext>(dbContextOptions => dbContextOptions.UseInMemoryDatabase(databaseName: "Bowling"));
 
 builder.Services.AddMvc(options =>
 {
