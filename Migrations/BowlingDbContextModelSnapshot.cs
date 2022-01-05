@@ -31,12 +31,13 @@ namespace BowlingGame.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Shot1")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(1)");
 
                     b.Property<string>("Shot2")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(1)");
+
+                    b.Property<string>("Shot3")
+                        .HasColumnType("varchar(1)");
 
                     b.HasKey("Id");
 

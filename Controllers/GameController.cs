@@ -14,7 +14,6 @@ namespace BowlingGame.Controllers
 
         public GameController(BowlingDbContext bowlingDbContext)
         {
-            var factory = new ApplicationDbContextFactory();
             _bowlingDbContext = bowlingDbContext;
         }
 
@@ -35,24 +34,21 @@ namespace BowlingGame.Controllers
                 Players = players.ToArray()
             });
 
-            try
-            {
+            
                 _bowlingDbContext.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            
+            
             return game.Entity;
         }
 
         [HttpGet]
-        public GameDTO Get(int id)
+        public GameDTO? Get(int id)
         {
             return _bowlingDbContext.Games
                 .Include(x => x.Players)
-                .Where(g => g.ID == id)
-                .FirstOrDefault();
+                .ThenInclude(x => x.ScoreCard)
+                .ThenInclude(x => x.Frames)
+                .FirstOrDefault(g => g.ID == id);
         }
 
     }

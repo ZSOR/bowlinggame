@@ -18,28 +18,31 @@ namespace BowlingGame.Controllers
         }
 
         [HttpPost]
-        public FrameDTO AddFrame(int scoreCardId, string shot1, string shot2)
+        public FrameDTO AddFrame(int playerId, char? shot1, char? shot2, char? shot3)
         {
-            var scoreCard = _bowlingDbContext.ScoreCards.Include(y => y.Frames).Where(x => x.Id == scoreCardId).FirstOrDefault();
+            var scoreCard = _bowlingDbContext.ScoreCards.Include(y => y.Frames).Where(x => x.PlayerId == playerId).FirstOrDefault();
 
-            if (scoreCard == null)  throw new BadHttpRequestException($"No scored cared with id {scoreCardId}");  
+            if (scoreCard == null)  throw new BadHttpRequestException($"No scored cared with id {playerId}");  
 
             if (scoreCard.Frames != null && scoreCard.Frames.Count == 10) throw new BadHttpRequestException("All frames recorded");
 
             var frameNumber = scoreCard.Frames == null ? 0: scoreCard.Frames.Count + 1;
-
-            var frame = _bowlingDbContext.Add(new FrameDTO
+            try
             {
-                ScoreCardId = scoreCardId,
-                Shot1 = shot1,
-                Shot2 = shot2,
-                FrameNumber = frameNumber,
-                ScoreCard = scoreCard
-            });
+                var frame = _bowlingDbContext.Add(new FrameDTO(shot1, shot2, shot3, frameNumber)
+                {
+                    ScoreCardId = scoreCard.Id,
+                    ScoreCard = scoreCard
+                });
+                _bowlingDbContext.SaveChanges();
 
-            _bowlingDbContext.SaveChanges();
+                return frame.Entity;
+            } catch (ArgumentException ex)
+            {
+                throw new BadHttpRequestException(ex.Message);
+            }
 
-            return frame.Entity;
+            
         }
     }
 }
