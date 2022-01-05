@@ -1,0 +1,6 @@
+﻿version: '3.4'
+
+services:
+  database:
+    ports:
+      - "3326:3306"
