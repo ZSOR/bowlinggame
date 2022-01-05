@@ -1,6 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace BowlingGame.DAL.Models
 {
@@ -8,10 +9,11 @@ namespace BowlingGame.DAL.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Guid { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }   
 
         public int GameId { get; set; }
+        [JsonIgnore]
         public GameDTO Game { get; set; }
 
         public ScoreCardDTO ScoreCard { get; set; }

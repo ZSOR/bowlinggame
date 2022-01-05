@@ -2,6 +2,7 @@
 using BowlingGame.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BowlingGame.Migrations
 {
     [DbContext(typeof(BowlingDbContext))]
-    partial class BowlingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220105151447_Adding foreign key to all dtos")]
+    partial class Addingforeignkeytoalldtos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,19 +26,8 @@ namespace BowlingGame.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("FrameNumber")
-                        .HasColumnType("int");
-
                     b.Property<int>("ScoreCardId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Shot1")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Shot2")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -58,7 +49,7 @@ namespace BowlingGame.Migrations
 
             modelBuilder.Entity("BowlingGame.DAL.Models.PlayerDTO", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("Guid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -69,7 +60,7 @@ namespace BowlingGame.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("Id");
+                    b.HasKey("Guid");
 
                     b.HasIndex("GameId");
 

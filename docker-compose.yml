@@ -3,12 +3,13 @@ version: '3.4'
 #create a volume for the my sql container.To ensure Data persists after my sql container is stopped
 volumes:
   datafiles:
+  static:
 
 services:
   #DataBase Service
   database:
     #Pull the latest mysql image
-    image: mysql:8.0.22
+    image: mysql:8.0.27
     container_name: bowlingApi-mysql
     #Specify where the persisted Data should be stored
     volumes:
@@ -31,9 +32,11 @@ services:
       - database
     #Map port 8888 in the docker container to port 80 in the Api
     ports:
-      - "5000:80"
+      - "4567:80"
     networks:
       - bowlingApi-net
+    volumes:
+     - static:/var/lib/api 
 networks:
   bowlingApi-net:  
     driver: bridge

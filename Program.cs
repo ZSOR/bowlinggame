@@ -17,14 +17,32 @@ builder.Services.AddSwaggerGen();
 
 
 //Add MySql connection
-var serverVersion = new MySqlServerVersion(new Version("8.0.22"));
-
-var dbBuilder = new DbContextOptionsBuilder<BowlingDbContext>();
+var serverVersion = new MySqlServerVersion(new Version("8.0.27"));
 //register the db conext in services
-dbBuilder.UseMySql(ConfigurationService.Configuration.GetConnectionString("DefaultConnection"), serverVersion)
+builder.Services.AddDbContext<BowlingDbContext>(
+    dbContextOptions => 
+    dbContextOptions.UseMySql("server=localhost;user=root;password=Password123;database=bowling", serverVersion)
     .LogTo(Console.WriteLine, LogLevel.Information)
     .EnableSensitiveDataLogging()
-    .EnableDetailedErrors();
+    .EnableDetailedErrors()
+    );
+
+builder.Services.AddMvc(options =>
+{
+    options.SuppressAsyncSuffixInActionNames = false;
+});
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      builder =>
+                      {
+                          builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+                      });
+});
+
 
 var app = builder.Build();
 

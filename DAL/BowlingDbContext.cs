@@ -1,6 +1,5 @@
 ﻿using BowlingGame.DAL.Models;
 using Microsoft.EntityFrameworkCore;
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BowlingGame.DAL
 {
@@ -13,12 +12,15 @@ namespace BowlingGame.DAL
     
         public DbSet<GameDTO>? Games { get; set; }
         public DbSet<PlayerDTO>? Players { get; set; }
-
+        public DbSet<ScoreCardDTO> ScoreCards { get; set; }
+        public DbSet<FrameDTO> Frames { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<PlayerDTO>().HasOne(p => p.Game).WithMany(g => g.Players);
+            modelBuilder.Entity<PlayerDTO>().HasOne(p => p.Game).WithMany(g => g.Players).HasForeignKey(p => p.GameId);
+            modelBuilder.Entity<FrameDTO>().HasOne(f => f.ScoreCard).WithMany(s => s.Frames).HasForeignKey(f => f.ScoreCardId);
+            modelBuilder.Entity<ScoreCardDTO>().HasOne(s => s.Player).WithOne(p => p.ScoreCard);
 
         }
     }
