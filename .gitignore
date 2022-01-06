@@ -1,5 +1,11 @@
-/.dockerignore
-/.vs/BowlingGame/v17/.suo
-/BowlingGame.csproj.user
-/bin
-/obj
+/BowlingGameTests/bin
+/BowlingGameTests/obj
+/BowlingGame/.vs/BowlingGame/DesignTimeBuild/.dtbcache.v2
+/BowlingGame/.vs/BowlingGame/config/applicationhost.config
+/BowlingGame/.vs/BowlingGame/project-colors.json
+/BowlingGame/.vs/BowlingGame/v16/.suo
+/BowlingGame/.vs/BowlingGame/v16/TestStore/0/000.testlog
+/BowlingGame/.vs/BowlingGame/v16/TestStore/0/testlog.manifest
+/BowlingGame/.vs/BowlingGame/v17/.futdcache.v1
+/BowlingGame/.vs/BowlingGame/v17/TestStore/0/000.testlog
+/BowlingGame/.vs/BowlingGame/v17/TestStore/0/testlog.manifest
