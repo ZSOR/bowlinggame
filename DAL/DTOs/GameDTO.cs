@@ -12,7 +12,7 @@ namespace BowlingGame.DAL.Models
 
         public int ID { get; set; }
         
-        public virtual ICollection<PlayerDTO> Players { get; set; }
+        public virtual ICollection<PlayerDTO>? Players { get; set; }
 
     }
 }

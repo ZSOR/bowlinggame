@@ -12,7 +12,7 @@ namespace BowlingGame.DAL.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public ICollection<FrameDTO>? Frames { get; set; }
-        public int PlayerId { get; set; }
+        public int? PlayerId { get; set; }
         [JsonIgnore]
         public PlayerDTO Player { get; set; }
 

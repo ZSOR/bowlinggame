@@ -10,13 +10,13 @@ namespace BowlingGame.DAL.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Name { get; set; }   
+        public string? Name { get; set; }   
 
         public int GameId { get; set; }
         [JsonIgnore]
-        public GameDTO Game { get; set; }
+        public GameDTO? Game { get; set; }
 
-        public ScoreCardDTO ScoreCard { get; set; }
+        public ScoreCardDTO? ScoreCard { get; set; }
 
     }
 }

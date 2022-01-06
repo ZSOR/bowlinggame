@@ -10,10 +10,10 @@ namespace BowlingGame.DAL
 
         }
     
-        public DbSet<GameDTO> Games { get; set; }
-        public DbSet<PlayerDTO> Players { get; set; }
-        public DbSet<ScoreCardDTO> ScoreCards { get; set; }
-        public DbSet<FrameDTO> Frames { get; set; }
+        public DbSet<GameDTO>? Games { get; set; }
+        public DbSet<PlayerDTO>? Players { get; set; }
+        public DbSet<ScoreCardDTO>? ScoreCards { get; set; }
+        public DbSet<FrameDTO>? Frames { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
